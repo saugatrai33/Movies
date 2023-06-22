@@ -13,16 +13,13 @@ class DetailViewModel(
     private val getMovieUseCase: GetMovieUseCase,
     movieId: Int
 ) : ViewModel() {
+    var uiState by mutableStateOf(DetailScreenState())
 
     init {
         loadMovie(movieId)
     }
 
-    var uiState by mutableStateOf(DetailScreenState())
-
     private fun loadMovie(movieId: Int) {
-        if (uiState.loading) return
-
         viewModelScope.launch {
             uiState = uiState.copy(loading = true)
 
